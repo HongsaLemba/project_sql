@@ -1,5 +1,6 @@
 ### Windows ###
 # Windows thumbnail cache files
+.vscode
 csv_files
 Thumbs.db
 Thumbs.db:encryptable
