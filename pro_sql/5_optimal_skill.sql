@@ -51,6 +51,3 @@ ORDER BY
     avg_salary.avgerage_salary DESC,
     skill_demand.demand_count DESC
 LIMIT 25
-
-
-
