@@ -1,7 +1,9 @@
 ### Windows ###
-# Windows thumbnail cache files
+# General
 .vscode
 csv_files
+
+# Windows thumbnail cache files
 Thumbs.db
 Thumbs.db:encryptable
 ehthumbs.db
