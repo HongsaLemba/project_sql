@@ -20,3 +20,19 @@ GROUP BY
 ORDER BY
     demand_count DESC
 LIMIT 5;
+
+/*
+Key Insights:-
+
+SQL is the Absolute Baseline: With over 92.6k mentions, 
+SQL leads all skills by a wide margin—appearing in nearly 38% more listings than Excel and 61% more than Python.
+
+Spreadsheets Remain Vital: Despite the rise of programmatic data analysis, Excel (67,031) ranks second overall, 
+proving that core ad-hoc analysis and reporting tools are still indispensable across organizations.
+
+Programming Automation: Python (57,326) firmly establishes itself as the primary scripting and statistical language for analysts, 
+significantly outpacing other languages in raw demand.
+
+Visualization Split (Tableau vs. Power BI): Combined BI tools account for 86,022 postings (~28.4% of top demand). 
+Tableau holds a slight lead over Power BI by roughly 18% (46.5k vs. 39.5k). 
+*/
