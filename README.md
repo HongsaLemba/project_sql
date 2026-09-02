@@ -51,26 +51,173 @@ ORDER BY
 LIMIT 10; 
 ```
 ![Top Paying Roles](assets/Code_Generated_Image.png)
+*Bar graph visualizing the salary for the top 10
+salaries for data analysts; Gemini generated this
+graph from my SQL query results*
 
 
-### 2. Most In-Demand Skills Overall
+
+### 2. skills for top paying jobs ###
 Across all data analyst postings, foundational data tools dominate:
 1. **SQL (92,628 postings / ~30.6% share)** – The uncontested baseline requirement.
 2. **Excel (67,031 postings / ~22.1% share)** – The standard for business reporting and ad-hoc analysis.
 3. **Python (57,326 postings / ~18.9% share)** – The industry-standard programming and scripting language.
 4. **Tableau (46,554 postings)** & **Power BI (39,468 postings)** – Visual storytelling anchors.
+#### SQL Reprsentation below :- ####
+```sql
+with top_paying_jobs as (
+    SELECT
+        job_id,
+        job_title,
+        salary_year_avg,
+        name as company_name
+    FROM
+        job_postings_fact
+    LEFT JOIN company_dim on job_postings_fact.company_id = company_dim.company_id
+    WHERE
+        job_title_short = 'Data Analyst' AND 
+        job_location = 'Anywhere' AND
+        salary_year_avg is not NULL
+    ORDER BY
+        salary_year_avg DESC
+)
 
-### 3. Highest-Paying Skills
-- **Niche & Web3/Specialized Databases:** Skills such as **Solidity ($179k)**, **Couchbase ($160.5k)**, and **DataRobot ($155.5k)** command major salary premiums due to talent scarcity.
-- **Cloud & Modern Data Stack:** Technologies like **Snowflake ($112.9k)**, **Azure ($111.2k)**, **BigQuery ($109.7k)**, and **AWS ($108.3k)** offer a ~$10k–$15k salary boost over traditional spreadsheet-only profiles.
-- **AI & ML Frameworks:** Deep learning tools (**MXNet, Keras, PyTorch, Hugging Face, TensorFlow**) average between **$120k and $149k**.
+SELECT 
+    top_paying_jobs.*,
+    skills
+from top_paying_jobs
+INNER JOIN skills_job_dim on top_paying_jobs.job_id = skills_job_dim.job_id
+INNER JOIN skills_dim on skills_job_dim.skill_id = skills_dim.skill_id
+ORDER BY
+    salary_year_avg DESC
+```
+
+![Top paying skills](assets/2_top_paying_skills.png)
+*Bar graph visualizing for the top 10
+most demanded skills in Top paying Data Analysts Job; Gemini generated this
+graph from my SQL query results*
+
+
+
+# 3. Top Data Analyst Skills by Demand
+
+An overview of the top 5 most demanded skills in Data Analyst job postings[cite: 2].
+
+| Rank | Skill | Job Postings | Share |
+| :---: | :--- | :---: | :---: |
+| 1 | **SQL** | 92,628 | 30.6% |
+| 2 | **Excel** | 67,031 | 22.1% |
+| 3 | **Python** | 57,326 | 18.9% |
+| 4 | **Tableau** | 46,554 | 15.4% |
+| 5 | **Power BI** | 39,468 | 13.0% |
+
+## 🔍 Key Takeaways
+* **SQL is #1:** Appears in nearly 1 in 3 postings as the primary baseline[cite: 2].
+* **Top 3 Core:** SQL, Excel, and Python drive **71.6%** of total demand[cite: 2].
+* **BI Split:** Tableau maintains an 18% lead over Power BI[cite: 2].
+
+## 🎯 Target Stack
+`SQL` ➔ `Excel` ➔ `Python` ➔ `Tableau / Power BI`
+#### SQL Reprsentation below :- ####
+```sql
+SELECT 
+    skills,
+    count(skills_job_dim.job_id) as demand_count
+from job_postings_fact
+INNER JOIN skills_job_dim on job_postings_fact.job_id = skills_job_dim.job_id
+INNER JOIN skills_dim on skills_job_dim.skill_id = skills_dim.skill_id
+WHERE
+    job_title_short = 'Data Analyst'
+GROUP BY
+    skills
+ORDER BY
+    demand_count DESC
+LIMIT 5; 
+```
+![In_demand skills](assets/3_in-demand_skills.png)
+*Bar graph visualizing for the top 5
+most demanded skills in  Data Analysts Job; Gemini generated this
+graph from my SQL query results*
 
 ### 4. Optimal Sweet Spot (High Demand + High Pay in Remote Roles)
 When cross-referencing salary against market volume for remote Data Analyst roles:
 - **Core Volume Anchors:** **Python** (236 postings, $101.4k avg), **Tableau** (230 postings, $99.3k avg), and **R** (148 postings, $100.5k avg).
 - **High-Value Cloud/BI Upgrades:** **Looker** ($103.8k), **Snowflake** ($112.9k), and **Azure** ($111.2k) offer the strongest balance between solid hiring demand and elevated pay tiers.
+#### SQL Reprsentation below :- ####
+```sql
+SELECT 
+    skills,
+    ROUND(AVG(salary_year_avg),0) as avg_salary
+from job_postings_fact
+INNER JOIN skills_job_dim on job_postings_fact.job_id = skills_job_dim.job_id
+INNER JOIN skills_dim on skills_job_dim.skill_id = skills_dim.skill_id
+WHERE
+    job_title_short = 'Data Analyst' AND
+    salary_year_avg is not NULL
+ -- AND job_work_from_home = True
+GROUP BY
+    skills
+ORDER BY
+    avg_salary DESC
+LIMIT 25;
+```
+![top paying jobs](assets/4_top_paying_jobs.png)
+*Bar graph visualizing for the top 10
+most paying jobs; Gemini generated this
+graph from my SQL query results*
 
 ---
+
+
+## 5. Top 10 optimal-Skills Ranking
+
+| Rank | Skill | Average Salary ($) | Job Demand | Strategic Domain |
+| :---: | :--- | :---: | :---: | :--- |
+| **1** | **Go** | $115,320 | 27 | Systems & Backend Programming |
+| **2** | **Confluence** | $114,210 | 11 | Agile Collaboration & Documentation |
+| **3** | **Hadoop** | $113,193 | 22 | Big Data Processing |
+| **4** | **Snowflake** | $112,948 | 37 | Cloud Data Warehousing |
+| **5** | **Azure** | $111,225 | 34 | Cloud Platform & Services |
+| **6** | **BigQuery** | $109,654 | 13 | Serverless Data Warehousing |
+| **7** | **AWS** | $108,317 | 32 | Cloud Infrastructure & Pipelines |
+| **8** | **Java** | $106,906 | 17 | Enterprise Application Development |
+| **9** | **SSIS** | $106,683 | 12 | Enterprise ETL / Integration |
+| **10** | **Jira** | $104,918 | 20 | Project Management & Agile Tracking |
+
+---
+
+## 🔍 Key Insights
+
+* **High Earning Baseline:** Every skill in the top 10 averages above **$104,000**, with the top 5 clearing the **$111,000+** threshold[cite: 5].
+* **Cloud & Warehouse Sweet Spot:** **Snowflake** (37 postings, $112,948), **Azure** (34 postings, $111,225), and **AWS** (32 postings, $108,317) offer the best combination of six-figure pay and high hiring volume[cite: 5].
+* **Engineering Overlap:** High-performance languages and pipeline infrastructure (**Go**, **Hadoop**, **Java**) command the top salary bracket[cite: 5].
+#### SQL Reprsentation below :- ####
+```sql
+SELECT
+    skills_dim.skill_id,
+    skills_dim.skills,
+    COUNT(skills_job_dim.job_id) AS demand_count,
+    ROUND(AVG(salary_year_avg), 0) AS average_salary
+FROM job_postings_fact
+INNER JOIN skills_job_dim on job_postings_fact.job_id = skills_job_dim.job_id
+INNER JOIN skills_dim on skills_job_dim.skill_id = skills_dim.skill_id
+WHERE
+    job_title_short = 'Data Analyst'
+    AND salary_year_avg IS NOT NULL
+    AND job_work_from_home = True
+GROUP BY
+    skills_dim.skill_id
+HAVING
+    COUNT(skills_job_dim.job_id) > 10
+ORDER BY
+    average_salary DESC,
+    demand_count DESC
+LIMIT 10;
+ ```
+ ![Top 10 optimal skills](assets/5_top_optimal_skills.png)
+ *Bar graph visualizing for the top 10
+optimal skills to learn; Gemini generated this
+graph from my SQL query results*
 
 ## 🧠 What I Learned
 - **SQL is Non-Negotiable:** Regardless of salary tier or company size, SQL remains the single most universally tested and demanded skill.

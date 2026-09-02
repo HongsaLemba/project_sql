@@ -1,5 +1,5 @@
 /*
-QUESTION: what are the most optomal skills to leatn (aka it's in high demand and high_paying skills)?
+QUESTION: what are the most optomal skills to learn (aka it's in high demand and high_paying skills)?
 - Identify skills in high demand and demand and associated with high average slaries for Data Analyst positions
 - concentrates on temote position with specified salaries (remove null)
 - Why? Targets skills that offer job security (high demand) and financial benefits (high salaries),
@@ -50,4 +50,4 @@ WHERE
 ORDER BY 
     avg_salary.avgerage_salary DESC,
     skill_demand.demand_count DESC
-LIMIT 25
+LIMIT 10
