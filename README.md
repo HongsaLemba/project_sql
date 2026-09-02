@@ -57,7 +57,7 @@ graph from my SQL query results*
 
 
 
-### 2. skills for top paying jobs ###
+### 2. skills for top paying jobs in Data Analysis ###
 Across all data analyst postings, foundational data tools dominate:
 1. **SQL (92,628 postings / ~30.6% share)** – The uncontested baseline requirement.
 2. **Excel (67,031 postings / ~22.1% share)** – The standard for business reporting and ad-hoc analysis.
