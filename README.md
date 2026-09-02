@@ -99,7 +99,7 @@ graph from my SQL query results*
 
 
 
-# 3. Top Data Analyst Skills by Demand
+### 3. Top Data Analyst Skills by Demand ###
 
 An overview of the top 5 most demanded skills in Data Analyst job postings[cite: 2].
 
